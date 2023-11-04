@@ -2,9 +2,6 @@
 
 ## Main functionality:
 
-- Investigate data structure for synonyms that fit requirements
-
-- Implement synonyms functionality
 - Set up API for synonyms functionality
 - Set up Docker container
 - Deploy Docker container with GitHub Actions
