@@ -19,3 +19,10 @@ test("Test that if A is a synonym to B, and B is a synonym to C, C has to be a s
   expect(synonyms.areSynonyms("wash", "clean")).toBe(true);
   expect(synonyms.areSynonyms("clean", "tidy")).toBe(true);
 });
+
+test("Find all synonyms for a word", () => {
+  const synonyms = new SynonymsService();
+  synonyms.add(["wash", "clean"]);
+  synonyms.add(["wash", "tidy"]);
+  expect(synonyms.findAllSynonyms("wash")).toEqual(["wash", "clean", "tidy"]);
+});

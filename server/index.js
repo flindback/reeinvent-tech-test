@@ -12,7 +12,6 @@ const addSynonymsHandler = ({ words = [] }) => {
 };
 
 const findSynonymsHandler = ({ word }) => {
-  //console.log("WORD", word);
   if (!word) {
     return { success: false, message: "No word in request" };
   }
