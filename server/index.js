@@ -11,7 +11,7 @@ const addSynonymsHandler = ({ words = [] }) => {
   return { success: true, message: "Words added successfully" };
 };
 
-const checkSynonymsHandler = ({ word }) => {
+const findSynonymsHandler = ({ word }) => {
   //console.log("WORD", word);
   if (!word) {
     return { success: false, message: "No word in request" };
@@ -29,7 +29,7 @@ const checkSynonymsHandler = ({ word }) => {
 
 const handlers = {
   "/add": addSynonymsHandler,
-  "/check": checkSynonymsHandler,
+  "/find": findSynonymsHandler,
 };
 
 Bun.serve({
