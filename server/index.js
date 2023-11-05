@@ -11,23 +11,25 @@ const addSynonymsHandler = ({ words = [] }) => {
   return { success: true, message: "Words added successfully" };
 };
 
+const checkSynonymsHandler = ({ word = "" }) => {};
+
+const handlers = {
+  "/add": addSynonymsHandler,
+  "/check": checkSynonymsHandler,
+};
+
 Bun.serve({
   port: 8080,
   async fetch(req) {
     const url = new URL(req.url);
-    if (url.pathname === "/add") {
+    if (handlers[url.pathname]) {
       const body = await req.json();
-      const { success, message } = addSynonymsHandler(body);
-      if (!success) {
-        return new Response(JSON.stringify({ success, message }), {
-          status: 400,
-        });
-      }
-
+      const { success, message } = handlers[url.pathname](body);
       return new Response(JSON.stringify({ success, message }), {
-        status: 200,
+        status: success ? 200 : 400,
       });
     }
+
     return new Response(
       JSON.stringify({ success: false, message: "Not found" }),
       { status: 404 }
