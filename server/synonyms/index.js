@@ -51,4 +51,21 @@ export class SynonymsService {
       this.roots[synonymRoot] = wordRoot;
     }
   }
+  findAllSynonyms(word) {
+    const synonyms = [];
+    const wordRoot = this.find(word);
+
+    if (wordRoot === undefined) {
+      return synonyms; // Word not found
+    }
+
+    for (const word in this.roots) {
+      const rootOfCurrentWord = this.find(word);
+      if (rootOfCurrentWord === wordRoot) {
+        synonyms.push(word);
+      }
+    }
+
+    return synonyms;
+  }
 }

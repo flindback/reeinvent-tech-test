@@ -11,7 +11,21 @@ const addSynonymsHandler = ({ words = [] }) => {
   return { success: true, message: "Words added successfully" };
 };
 
-const checkSynonymsHandler = ({ word = "" }) => {};
+const checkSynonymsHandler = ({ word }) => {
+  //console.log("WORD", word);
+  if (!word) {
+    return { success: false, message: "No word in request" };
+  }
+  const synonymsForWord = synonyms.findAllSynonyms(word);
+
+  return synonymsForWord.length === 0
+    ? { success: false, message: `No synonyms found for ${word}` }
+    : {
+        success: true,
+        message: `Successfully found synonyms for ${word}`,
+        synonyms: synonymsForWord,
+      };
+};
 
 const handlers = {
   "/add": addSynonymsHandler,
@@ -24,9 +38,9 @@ Bun.serve({
     const url = new URL(req.url);
     if (handlers[url.pathname]) {
       const body = await req.json();
-      const { success, message } = handlers[url.pathname](body);
-      return new Response(JSON.stringify({ success, message }), {
-        status: success ? 200 : 400,
+      const response = handlers[url.pathname](body);
+      return new Response(JSON.stringify(response), {
+        status: response.success ? 200 : 400,
       });
     }
 
