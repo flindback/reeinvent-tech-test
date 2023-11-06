@@ -2,7 +2,6 @@
 
 ## Main functionality:
 
-- Set up API for synonyms functionality
 - Set up Docker container
 - Deploy Docker container with GitHub Actions
 - Throw Docker container in cloud 😏
