@@ -9,8 +9,8 @@ function App() {
   return (
     <>
       <SynonymsProvider>
-        <AddModal />
         <Header />
+        <AddModal />
         <Search />
         <Results />
       </SynonymsProvider>

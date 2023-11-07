@@ -11,12 +11,10 @@ import {
 } from "@chakra-ui/react";
 import { useSynonyms } from "../../context/SynonymsContext";
 import AddSynonymsForm from "./AddSynonymsForm";
-import { useState } from "react";
 
 const Add = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { wordsToAdd, setWordsToAdd, addSynonyms } = useSynonyms();
-  const [hasAddedSynonyms, setHasAddedSynonyms] = useState(false);
+  const { addSynonyms, addDispatch, addState } = useSynonyms();
 
   return (
     <>
@@ -29,19 +27,25 @@ const Add = () => {
           <ModalHeader>Add synonyms</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {hasAddedSynonyms ? (
+            {addState.hasAddedSynonyms ? (
               <>
                 <p>Synonyms added!</p>
-                <Button onClick={() => setHasAddedSynonyms(false)}>
+                <Button
+                  onClick={() =>
+                    addDispatch({
+                      type: "SET_HAS_ADDED_SYNONYMS",
+                      payload: false,
+                    })
+                  }
+                >
                   Add more!
                 </Button>
               </>
             ) : (
               <AddSynonymsForm
-                words={wordsToAdd}
-                setWords={setWordsToAdd}
-                setHasAddedSynonyms={setHasAddedSynonyms}
+                addDispatch={addDispatch}
                 addSynonyms={addSynonyms}
+                addState={addState}
               />
             )}
           </ModalBody>

@@ -16,11 +16,10 @@ https://reeinvent-tech-test.vercel.app/
 ### Main functionality:
 
 - Write API documentation for synonym API (swagger?)
-- Add component in client for "adding" synonyms
-- Add component to "search" for
 - Style components
 - Customize CORS headers for production
 - Refactor API code with DRY in mind
+- Move logic for add to Synonyms context in reducer
 - Add error handling for bad requests in API
 
 ### Maybe later:

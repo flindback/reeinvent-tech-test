@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState, useContext } from "react";
+import { createContext, useReducer, useContext } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
@@ -60,14 +60,37 @@ export const SynonymsProvider = ({ children }) => {
     }
   };
 
-  const [wordsToAdd, setWordsToAdd] = useState([]);
+  const addReducer = (state, action) => {
+    switch (action.type) {
+      case "ADD_WORD":
+        return { ...state, wordsToAdd: [...state.wordsToAdd, action.payload] };
+      case "REMOVE_WORD":
+        return {
+          ...state,
+          wordsToAdd: state.wordsToAdd.filter(
+            (word) => word !== action.payload
+          ),
+        };
+      case "RESET_WORDS_TO_ADD":
+        return { ...state, wordsToAdd: [] };
+      case "SET_HAS_ADDED_SYNONYMS":
+        return { ...state, hasAddedSynonyms: action.payload };
+      default:
+        return state;
+    }
+  };
+  // Initial state for addReducer
+  const [addState, addDispatch] = useReducer(addReducer, {
+    wordsToAdd: [],
+    hasAddedSynonyms: false,
+  });
 
   const addSynonyms = async () => {
     const baseUrl = "https://reeinvent-tech-test-st7ohfgpsq-lz.a.run.app";
     try {
       const data = await axios.post(
         `${baseUrl}/add`,
-        { words: wordsToAdd },
+        { words: addState.wordsToAdd },
         {
           headers: {
             "Content-Type": "application/json",
@@ -75,7 +98,7 @@ export const SynonymsProvider = ({ children }) => {
         }
       );
       if (data.responseCode === 200) {
-        setWordsToAdd([]);
+        addDispatch({ type: "SET_HAS_ADDED_SYNONYMS", payload: true });
         console.log("Synonyms added!");
       }
     } catch (e) {
@@ -89,8 +112,8 @@ export const SynonymsProvider = ({ children }) => {
         searchState,
         searchForSynonyms,
         searchDispatch,
-        wordsToAdd,
-        setWordsToAdd,
+        addDispatch,
+        addState,
         addSynonyms,
       }}
     >

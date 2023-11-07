@@ -12,19 +12,15 @@ import {
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
-const AddSynonymsForm = ({
-  words,
-  setWords,
-  addSynonyms,
-  setHasAddedSynonyms,
-}) => {
+const AddSynonymsForm = ({ addDispatch, addState, addSynonyms }) => {
+  console.log(addState.wordsToAdd);
   const handleKeyDown = (e) => {
     const actionableKeys = ["Enter", "NumpadEnter", "Space", "Comma"];
     if (actionableKeys.indexOf(e.code) !== -1) {
       e.preventDefault();
       const word = e.target.value.trim();
-      if (word.length > 0 && words.indexOf(word) === -1) {
-        setWords([...words, word]);
+      if (word.length > 0 && addState.wordsToAdd.indexOf(word) === -1) {
+        addDispatch({ type: "ADD_WORD", payload: word });
       }
       e.target.value = "";
     }
@@ -32,14 +28,14 @@ const AddSynonymsForm = ({
 
   const removeTag = (e, word) => {
     e.preventDefault();
-    const newWords = words.filter((w) => w !== word);
-    setWords(newWords);
+    const newWords = addState.wordsToAdd.filter((w) => w !== word);
+    addDispatch({ type: "REMOVE_WORD", payload: newWords });
   };
 
   const handleClick = () => {
-    addSynonyms(words);
-    setWords([]);
-    setHasAddedSynonyms(true);
+    addSynonyms(addState.wordsToAdd);
+    addDispatch({ type: "SET_HAS_ADDED_SYNONYMS", payload: true });
+    addDispatch({ type: "RESET_WORDS_TO_ADD" });
   };
   return (
     <FormControl>
@@ -49,7 +45,7 @@ const AddSynonymsForm = ({
         Add some words! Press enter, space or comma to add a word.
       </FormHelperText>
       <Wrap spacing={4}>
-        {words.map((word) => {
+        {addState.wordsToAdd.map((word) => {
           return (
             <WrapItem key={word}>
               <Tag size="lg">
@@ -70,8 +66,7 @@ const AddSynonymsForm = ({
 export default AddSynonymsForm;
 
 AddSynonymsForm.propTypes = {
-  words: PropTypes.array.isRequired,
-  setWords: PropTypes.func.isRequired,
+  addState: PropTypes.object.isRequired,
+  addDispatch: PropTypes.func.isRequired,
   addSynonyms: PropTypes.func.isRequired,
-  setHasAddedSynonyms: PropTypes.func.isRequired,
 };
