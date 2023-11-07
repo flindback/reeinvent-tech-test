@@ -1,19 +1,17 @@
 import "./App.css";
+import { SynonymsProvider } from "./context/SynonymsContext";
+import Header from "./components/Header";
+import AddModal from "./components/Add";
 import Search from "./components/Search";
 import Results from "./components/Results";
-import { SynonymsProvider } from "./context/SynonymsContext";
-import { Box, Heading } from "@chakra-ui/react";
 
 function App() {
   return (
     <>
-      <Heading as="h1" size="xl" pt="16px">
-        SynonymFinder!
-      </Heading>
-      <Box pb="24px" pt="12px">
-        <p>This nifty webapp lets you look up and add synonyms!</p>
-      </Box>
+      <Header />
       <SynonymsProvider>
+        <AddModal />
+        <Header />
         <Search />
         <Results />
       </SynonymsProvider>

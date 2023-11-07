@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Box, Spinner, Stack, Text } from "@chakra-ui/react";
 import { useSynonyms } from "../../context/SynonymsContext";
 

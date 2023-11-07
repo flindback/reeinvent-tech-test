@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState, useContext } from "react";
+import { createContext, useReducer, useContext } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
@@ -24,7 +24,7 @@ export const SynonymsProvider = ({ children }) => {
     }
   };
 
-  // Initial state
+  // Initial state for searchReducer
   const [searchState, searchDispatch] = useReducer(searchReducer, {
     searchTerm: "",
     results: { message: "", synonyms: [], success: false },
