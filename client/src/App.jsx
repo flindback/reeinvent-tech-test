@@ -1,8 +1,13 @@
 import "./App.css";
 import Search from "./components/Search";
+import { SynonymsProvider } from "./context/SynonymsContext";
 
 function App() {
-  return <Search />;
+  return (
+    <SynonymsProvider>
+      <Search />
+    </SynonymsProvider>
+  );
 }
 
 export default App;

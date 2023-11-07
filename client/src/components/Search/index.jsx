@@ -1,24 +1,14 @@
 import { InputGroup, InputLeftElement, Input, Button } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import axios from "axios";
-//https://reeinvent-tech-test-st7ohfgpsq-lz.a.run.app/
+import { useSynonyms } from "../../context/SynonymsContext";
 
 const Search = () => {
-  const apiURL = "https://reeinvent-tech-test-st7ohfgpsq-lz.a.run.app";
+  const { searchState, searchDispatch, searchForSynonyms } = useSynonyms();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target); // https://developer.mozilla.org/en-US/docs/Web/API/FormData - Web native fetching of form elements
-    let searchTerm = formData.get("synonym-search");
-    const { data } = await axios.post(
-      `${apiURL}/find`,
-      { word: { searchTerm } },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    console.log(data);
+    let { searchTerm } = searchState;
+    await searchForSynonyms(searchTerm);
   };
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
@@ -27,10 +17,14 @@ const Search = () => {
           <SearchIcon color="gray.300" />
         </InputLeftElement>
         <Input
-          type="tel"
+          type="text"
           placeholder="Look up synonyms!"
           id="synonym-search"
           name="synonym-search"
+          value={searchState.searchTerm}
+          onChange={(e) =>
+            searchDispatch({ type: "SET_SEARCH_TERM", payload: e.target.value })
+          }
         />
         <Button type="submit">Search</Button>
       </InputGroup>
