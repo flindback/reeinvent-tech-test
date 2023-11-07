@@ -19,7 +19,10 @@ const AddSynonymsForm = ({ addDispatch, addState, addSynonyms }) => {
     if (actionableKeys.indexOf(e.code) !== -1) {
       e.preventDefault();
       const word = e.target.value.trim();
-      if (word.length > 0 && addState.wordsToAdd.indexOf(word) === -1) {
+      if (
+        word.length > 0 &&
+        addState.wordsToAdd.indexOf(word.toLowerCase()) === -1
+      ) {
         addDispatch({
           type: "ADD_WORD",
           payload: word.toLowerCase(),
