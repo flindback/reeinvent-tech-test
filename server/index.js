@@ -59,12 +59,12 @@ const setCorsHeaders = (res, origin) => {
 Bun.serve({
   port: 8080,
   async fetch(req) {
-    const origin = req.headers.get("Origin") || req.headers.get("Referer");
-    console.log("Have origin, is:", origin);
     if (req.method === "OPTIONS") {
       const res = new Response("Departed", CORS_HEADERS);
       return res;
     }
+    const origin = req.headers.get("Origin") || req.headers.get("Referer");
+    console.log("Have origin, is:", origin);
     if (origin && !allowedOrigins.includes(origin)) {
       return new Response("Forbidden", { status: 403 });
     }
