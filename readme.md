@@ -19,6 +19,7 @@ https://reeinvent-tech-test.vercel.app/
 - Add component in client for "adding" synonyms
 - Add component to "search" for
 - Style components
+- Customize CORS headers for production
 
 ### Maybe later:
 

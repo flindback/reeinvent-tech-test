@@ -38,9 +38,15 @@ Bun.serve({
     if (handlers[url.pathname]) {
       const body = await req.json();
       const response = handlers[url.pathname](body);
-      return new Response(JSON.stringify(response), {
+      const res = new Response(JSON.stringify(response), {
         status: response.success ? 200 : 400,
       });
+      res.headers.set("Access-Control-Allow-Origin", "*");
+      res.headers.set(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, OPTIONS"
+      );
+      return res;
     }
 
     return new Response(
