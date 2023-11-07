@@ -4,7 +4,7 @@ import axios from "axios";
 //https://reeinvent-tech-test-st7ohfgpsq-lz.a.run.app/
 
 const Search = () => {
-  const apiURL = "https://reeinvent-tech-test-st7ohfgpsq-lz.a.run.app/";
+  const apiURL = "https://reeinvent-tech-test-st7ohfgpsq-lz.a.run.app";
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target); // https://developer.mozilla.org/en-US/docs/Web/API/FormData - Web native fetching of form elements
