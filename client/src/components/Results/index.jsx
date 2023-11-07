@@ -1,4 +1,13 @@
-import { Spinner, Stack, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import {
+  Heading,
+  Spinner,
+  Stack,
+  Tag,
+  TagLabel,
+  Text,
+  Wrap,
+  WrapItem,
+} from "@chakra-ui/react";
 import { useSynonyms } from "../../context/SynonymsContext";
 
 const Results = () => {
@@ -14,10 +23,19 @@ const Results = () => {
 
   return (
     <Stack>
-      <Wrap pt="24px">
+      <Heading as="h2" align={"left"} size="md" pt="24px">
+        Synonyms for {lastSearchTerm}
+      </Heading>
+      <Wrap>
         {synonyms.length ? (
           wordList.map((word) => {
-            return <WrapItem key={word}>{word}</WrapItem>;
+            return (
+              <WrapItem key={word}>
+                <Tag size="lg" colorScheme="teal">
+                  <TagLabel>{word}</TagLabel>
+                </Tag>
+              </WrapItem>
+            );
           })
         ) : (
           <Text>No synonyms.</Text>
