@@ -61,12 +61,12 @@ Bun.serve({
   async fetch(req) {
     const origin = req.headers.get("Origin") || req.headers.get("Referer");
     console.dir("Have origin, is:", origin);
-    if (origin && !allowedOrigins.includes(origin)) {
-      return new Response("Forbidden", { status: 403 });
-    }
     if (req.method === "OPTIONS") {
       const res = new Response("Departed", CORS_HEADERS);
       return res;
+    }
+    if (origin && !allowedOrigins.includes(origin)) {
+      return new Response("Forbidden", { status: 403 });
     }
     const url = new URL(req.url);
     if (handlers[url.pathname]) {
