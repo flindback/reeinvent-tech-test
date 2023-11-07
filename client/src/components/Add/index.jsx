@@ -51,7 +51,17 @@ const Add = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={() => {
+                onClose();
+                addDispatch({
+                  type: "SET_HAS_ADDED_SYNONYMS",
+                  payload: false,
+                });
+              }}
+            >
               Close
             </Button>
           </ModalFooter>
