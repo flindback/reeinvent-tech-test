@@ -17,7 +17,7 @@ const addSynonymsHandler = ({ words = [] }) => {
 
 const findSynonymsHandler = ({ word }) => {
   if (!word) {
-    return { success: true, message: "No word in request", responseCode: 200 };
+    return { success: true, message: "No word in request", responseCode: 400 };
   }
   const synonymsForWord = synonyms.findAllSynonyms(word);
 
