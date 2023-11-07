@@ -19,6 +19,8 @@ export const SynonymsProvider = ({ children }) => {
         return { ...state, isLoading: true, error: null };
       case "SET_ERROR":
         return { ...state, error: action.payload, isLoading: false };
+      case "LAST_SEARCH_TERM":
+        return { ...state, lastSearchTerm: action.payload };
       default:
         return state;
     }
@@ -30,6 +32,7 @@ export const SynonymsProvider = ({ children }) => {
     results: { message: "", synonyms: [], success: false },
     isLoading: false,
     error: null,
+    lastSearchTerm: "",
   });
 
   const searchForSynonyms = async (word) => {

@@ -9,6 +9,7 @@ const Search = () => {
     e.preventDefault();
     let { searchTerm } = searchState;
     await searchForSynonyms(searchTerm);
+    searchDispatch({ type: "LAST_SEARCH_TERM", payload: searchTerm });
   };
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
