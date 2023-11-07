@@ -4,7 +4,7 @@ const synonyms = new SynonymsService();
 
 const addSynonymsHandler = ({ words = [] }) => {
   if (!words.length) {
-    return { success: false, message: "No words to add", responseCode: 200 };
+    return { success: false, message: "No words to add", responseCode: 400 };
   }
   synonyms.add(words);
   console.dir(synonyms.roots);
@@ -17,7 +17,7 @@ const addSynonymsHandler = ({ words = [] }) => {
 
 const findSynonymsHandler = ({ word }) => {
   if (!word) {
-    return { success: true, message: "No word in request", responseCode: 400 };
+    return { success: false, message: "No word in request", responseCode: 400 };
   }
   const synonymsForWord = synonyms.findAllSynonyms(word);
 
