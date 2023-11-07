@@ -20,6 +20,8 @@ https://reeinvent-tech-test.vercel.app/
 - Add component to "search" for
 - Style components
 - Customize CORS headers for production
+- Refactor API code with DRY in mind
+- Add error handling for bad requests in API
 
 ### Maybe later:
 

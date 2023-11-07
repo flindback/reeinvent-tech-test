@@ -4,25 +4,34 @@ const synonyms = new SynonymsService();
 
 const addSynonymsHandler = ({ words = [] }) => {
   if (!words.length) {
-    return { success: false, message: "No words to add" };
+    return { success: false, message: "No words to add", responseCode: 200 };
   }
   synonyms.add(words);
   console.dir(synonyms.roots);
-  return { success: true, message: "Words added successfully" };
+  return {
+    success: true,
+    message: "Words added successfully",
+    responseCode: 200,
+  };
 };
 
 const findSynonymsHandler = ({ word }) => {
   if (!word) {
-    return { success: false, message: "No word in request" };
+    return { success: true, message: "No word in request", responseCode: 200 };
   }
   const synonymsForWord = synonyms.findAllSynonyms(word);
 
   return synonymsForWord.length === 0
-    ? { success: false, message: `No synonyms found for ${word}` }
+    ? {
+        success: false,
+        message: `No synonyms found for ${word}`,
+        responseCode: 200,
+      }
     : {
         success: true,
         message: `Successfully found synonyms for ${word}`,
         synonyms: synonymsForWord,
+        responseCode: 200,
       };
 };
 
@@ -51,7 +60,7 @@ Bun.serve({
       const body = await req.json();
       const response = handlers[url.pathname](body);
       const res = new Response(JSON.stringify(response), {
-        status: response.success ? 200 : 400,
+        status: response.responseCode,
       });
       res.headers.set("Content-Type", "application/json");
       res.headers.set("Access-Control-Allow-Origin", "*");
