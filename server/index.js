@@ -35,10 +35,7 @@ const findSynonymsHandler = ({ word }) => {
       };
 };
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://reeinvent-tech-test.vercel.app/",
-];
+const allowedOrigins = ["https://reeinvent-tech-test.vercel.app/"];
 
 const CORS_HEADERS = {
   headers: {
@@ -77,7 +74,9 @@ Bun.serve({
       const res = new Response(JSON.stringify(response), {
         status: response.responseCode,
       });
-      setCorsHeaders(res);
+      res.headers.set("Access-Control-Allow-Origin", origin);
+      res.headers.set("Access-Control-Allow-Methods", "OPTIONS, POST");
+      res.headers.set("Access-Control-Allow-Headers", "Content-Type");
       return res;
     }
 
@@ -85,7 +84,9 @@ Bun.serve({
       JSON.stringify({ success: false, message: "Not found" }),
       { status: 404 }
     );
-    setCorsHeaders(res);
+    res.headers.set("Access-Control-Allow-Origin", origin);
+    res.headers.set("Access-Control-Allow-Methods", "OPTIONS, POST");
+    res.headers.set("Access-Control-Allow-Headers", "Content-Type");
     return res;
   },
 });
