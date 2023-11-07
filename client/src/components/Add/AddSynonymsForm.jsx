@@ -20,7 +20,10 @@ const AddSynonymsForm = ({ addDispatch, addState, addSynonyms }) => {
       e.preventDefault();
       const word = e.target.value.trim();
       if (word.length > 0 && addState.wordsToAdd.indexOf(word) === -1) {
-        addDispatch({ type: "ADD_WORD", payload: word });
+        addDispatch({
+          type: "ADD_WORD",
+          payload: word.toLowerCase(),
+        });
       }
       e.target.value = "";
     }
