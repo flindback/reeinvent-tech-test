@@ -60,7 +60,7 @@ Bun.serve({
   port: 8080,
   async fetch(req) {
     const origin = req.headers.get("Origin") || req.headers.get("Referer");
-    console.dir("Have origin, is:", origin);
+    console.log("Have origin, is:", origin);
     if (req.method === "OPTIONS") {
       const res = new Response("Departed", CORS_HEADERS);
       return res;
