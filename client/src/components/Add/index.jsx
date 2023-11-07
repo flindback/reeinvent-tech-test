@@ -18,7 +18,7 @@ const Add = () => {
 
   return (
     <>
-      <Button onClick={onOpen} colorScheme="teal">
+      <Button onClick={onOpen} colorScheme="teal" mb="24px">
         Add synonyms
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>

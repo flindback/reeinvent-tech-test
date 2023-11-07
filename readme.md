@@ -19,7 +19,6 @@ https://reeinvent-tech-test.vercel.app/
 - Style components
 - Customize CORS headers for production
 - Refactor API code with DRY in mind
-- Move logic for add to Synonyms context in reducer
 - Add error handling for bad requests in API
 
 ### Maybe later:
