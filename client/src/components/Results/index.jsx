@@ -23,9 +23,14 @@ const Results = () => {
 
   return (
     <Stack>
-      <Heading as="h2" align={"left"} size="md" pt="24px">
-        Synonyms for {lastSearchTerm}
-      </Heading>
+      {lastSearchTerm.length ? (
+        <Heading as="h2" align={"left"} size="md" pt="24px">
+          Synonyms for {lastSearchTerm}
+        </Heading>
+      ) : (
+        ""
+      )}
+
       <Wrap>
         {synonyms.length ? (
           wordList.map((word) => {
