@@ -1,4 +1,4 @@
-import { createContext, useReducer, useContext } from "react";
+import { createContext, useReducer, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
@@ -33,13 +33,14 @@ export const SynonymsProvider = ({ children }) => {
   });
 
   const searchForSynonyms = async (word) => {
+    console.log(word);
     searchDispatch({ type: "START_LOADING" });
     try {
       console.log("Fetching synonyms...");
       const apiURL = "https://reeinvent-tech-test-st7ohfgpsq-lz.a.run.app";
       const { data } = await axios.post(
         `${apiURL}/find`,
-        { word: { word } },
+        { word: word },
         {
           headers: {
             "Content-Type": "application/json",
@@ -48,11 +49,7 @@ export const SynonymsProvider = ({ children }) => {
       );
       if (data.responseCode === 200) {
         searchDispatch({ type: "SET_RESULTS", payload: data });
-        console.log(
-          `Synonyms for "${word}" fetched ${
-            data.success ? "successfully" : "unsuccessfully"
-          } with message: ${data.message}`
-        );
+        console.log("Synonyms fetched!", data);
       } else {
         throw new Error(data.message || "Error fetching synonyms");
       }
@@ -63,12 +60,38 @@ export const SynonymsProvider = ({ children }) => {
     }
   };
 
+  const [wordsToAdd, setWordsToAdd] = useState([]);
+
+  const addSynonyms = async () => {
+    const baseUrl = "https://reeinvent-tech-test-st7ohfgpsq-lz.a.run.app";
+    try {
+      const data = await axios.post(
+        `${baseUrl}/add`,
+        { words: wordsToAdd },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (data.responseCode === 200) {
+        setWordsToAdd([]);
+        console.log("Synonyms added!");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <SynonymsContext.Provider
       value={{
         searchState,
         searchForSynonyms,
         searchDispatch,
+        wordsToAdd,
+        setWordsToAdd,
+        addSynonyms,
       }}
     >
       {children}

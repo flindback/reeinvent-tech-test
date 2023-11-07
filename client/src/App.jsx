@@ -8,7 +8,6 @@ import Results from "./components/Results";
 function App() {
   return (
     <>
-      <Header />
       <SynonymsProvider>
         <AddModal />
         <Header />
