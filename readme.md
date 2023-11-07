@@ -16,7 +16,6 @@ https://reeinvent-tech-test.vercel.app/
 ### Main functionality:
 
 - Write API documentation for synonym API (swagger?)
-- Style components
 - Customize CORS headers for production
 - Refactor API code with DRY in mind
 - Add error handling for bad requests in API

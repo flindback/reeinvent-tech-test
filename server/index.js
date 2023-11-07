@@ -48,6 +48,12 @@ const CORS_HEADERS = {
   },
 };
 
+const setCorsHeaders = (res) => {
+  res.headers.set("Access-Control-Allow-Origin", "*");
+  res.headers.set("Access-Control-Allow-Methods", "OPTIONS, POST");
+  res.headers.set("Access-Control-Allow-Headers", "Content-Type");
+};
+
 Bun.serve({
   port: 8080,
   async fetch(req) {
@@ -62,9 +68,7 @@ Bun.serve({
       const res = new Response(JSON.stringify(response), {
         status: response.responseCode,
       });
-      res.headers.set("Content-Type", "application/json");
-      res.headers.set("Access-Control-Allow-Origin", "*");
-      res.headers.set("Access-Control-Allow-Methods", "OPTIONS, POST");
+      setCorsHeaders(res);
       return res;
     }
 
@@ -72,9 +76,7 @@ Bun.serve({
       JSON.stringify({ success: false, message: "Not found" }),
       { status: 404 }
     );
-    res.headers.set("Content-Type", "application/json");
-    res.headers.set("Access-Control-Allow-Origin", "*");
-    res.headers.set("Access-Control-Allow-Methods", "OPTIONS, POST");
+    setCorsHeaders(res);
     return res;
   },
 });
