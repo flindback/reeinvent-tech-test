@@ -7,7 +7,6 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalFooter,
 } from "@chakra-ui/react";
 import { useSynonyms } from "../../context/SynonymsContext";
 import AddSynonymsForm from "./AddSynonymsForm";
@@ -49,22 +48,6 @@ const Add = () => {
               />
             )}
           </ModalBody>
-
-          <ModalFooter>
-            <Button
-              colorScheme="blue"
-              mr={3}
-              onClick={() => {
-                onClose();
-                addDispatch({
-                  type: "SET_HAS_ADDED_SYNONYMS",
-                  payload: false,
-                });
-              }}
-            >
-              Close
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

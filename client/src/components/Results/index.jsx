@@ -38,7 +38,7 @@ const Results = () => {
             );
           })
         ) : (
-          <Text>No synonyms.</Text>
+          <Text>No synonyms. Add some! 🚀</Text>
         )}
       </Wrap>
     </Stack>
