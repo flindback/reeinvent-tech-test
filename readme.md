@@ -16,7 +16,6 @@ https://reeinvent-tech-test.vercel.app/
 ### Main functionality:
 
 - Write API documentation for synonym API (swagger?)
-- Add error handling for bad requests in API
 
 ### Maybe later:
 

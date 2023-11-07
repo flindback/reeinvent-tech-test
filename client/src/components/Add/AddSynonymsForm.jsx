@@ -49,7 +49,7 @@ const AddSynonymsForm = ({ addDispatch, addState, addSynonyms }) => {
       <FormLabel>Synonyms to add:</FormLabel>
       <Input type="text" onKeyDown={(e) => handleKeyDown(e)} />
       <FormHelperText mb="10px">
-        Add some words! Press enter, space or comma to add a word.
+        Press enter, space or comma to add a word. You need to add at least two!
       </FormHelperText>
       <Wrap spacing={4}>
         {addState.wordsToAdd.map((word) => {
@@ -63,7 +63,13 @@ const AddSynonymsForm = ({ addDispatch, addState, addSynonyms }) => {
           );
         })}
       </Wrap>
-      <Button mt={4} colorScheme="teal" type="submit" onClick={handleClick}>
+      <Button
+        mt={4}
+        colorScheme="teal"
+        type="submit"
+        onClick={handleClick}
+        isDisabled={addState.wordsToAdd.length >= 2 ? false : true}
+      >
         Submit
       </Button>
     </FormControl>

@@ -100,7 +100,6 @@ export const SynonymsProvider = ({ children }) => {
       );
       if (data.responseCode === 200) {
         addDispatch({ type: "SET_HAS_ADDED_SYNONYMS", payload: true });
-        console.log("Synonyms added!");
       }
     } catch (e) {
       console.log(e);
