@@ -53,12 +53,19 @@ Bun.serve({
       const res = new Response(JSON.stringify(response), {
         status: response.success ? 200 : 400,
       });
+      res.headers.set("Content-Type", "application/json");
+      res.headers.set("Access-Control-Allow-Origin", "*");
+      res.headers.set("Access-Control-Allow-Methods", "OPTIONS, POST");
       return res;
     }
 
-    return new Response(
+    const res = new Response(
       JSON.stringify({ success: false, message: "Not found" }),
       { status: 404 }
     );
+    res.headers.set("Content-Type", "application/json");
+    res.headers.set("Access-Control-Allow-Origin", "*");
+    res.headers.set("Access-Control-Allow-Methods", "OPTIONS, POST");
+    return res;
   },
 });
