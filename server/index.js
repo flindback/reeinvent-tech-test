@@ -35,10 +35,10 @@ const findSynonymsHandler = ({ word }) => {
       };
 };
 
-const handlers = {
-  "/add": addSynonymsHandler,
-  "/find": findSynonymsHandler,
-};
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://reeinvent-tech-test.vercel.app/",
+];
 
 const CORS_HEADERS = {
   headers: {
@@ -48,8 +48,13 @@ const CORS_HEADERS = {
   },
 };
 
-const setCorsHeaders = (res) => {
-  res.headers.set("Access-Control-Allow-Origin", "*");
+const handlers = {
+  "/add": addSynonymsHandler,
+  "/find": findSynonymsHandler,
+};
+
+const setCorsHeaders = (res, origin) => {
+  res.headers.set("Access-Control-Allow-Origin", origin);
   res.headers.set("Access-Control-Allow-Methods", "OPTIONS, POST");
   res.headers.set("Access-Control-Allow-Headers", "Content-Type");
 };
@@ -57,6 +62,10 @@ const setCorsHeaders = (res) => {
 Bun.serve({
   port: 8080,
   async fetch(req) {
+    const origin = req.headers.get("Origin");
+    if (origin && !allowedOrigins.includes(origin)) {
+      return new Response("Forbidden", { status: 403 });
+    }
     if (req.method === "OPTIONS") {
       const res = new Response("Departed", CORS_HEADERS);
       return res;
