@@ -70,9 +70,7 @@ export const SynonymsProvider = ({ children }) => {
       case "REMOVE_WORD":
         return {
           ...state,
-          wordsToAdd: state.wordsToAdd.filter(
-            (word) => word !== action.payload
-          ),
+          wordsToAdd: action.payload,
         };
       case "RESET_WORDS_TO_ADD":
         return { ...state, wordsToAdd: [] };

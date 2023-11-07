@@ -35,6 +35,7 @@ const AddSynonymsForm = ({ addDispatch, addState, addSynonyms }) => {
   const removeTag = (e, word) => {
     e.preventDefault();
     const newWords = addState.wordsToAdd.filter((w) => w !== word);
+    console.log("new", newWords);
     addDispatch({ type: "REMOVE_WORD", payload: newWords });
   };
 
