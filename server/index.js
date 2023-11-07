@@ -31,9 +31,21 @@ const handlers = {
   "/find": findSynonymsHandler,
 };
 
+const CORS_HEADERS = {
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "OPTIONS, POST",
+    "Access-Control-Allow-Headers": "Content-Type",
+  },
+};
+
 Bun.serve({
   port: 8080,
   async fetch(req) {
+    if (req.method === "OPTIONS") {
+      const res = new Response("Departed", CORS_HEADERS);
+      return res;
+    }
     const url = new URL(req.url);
     if (handlers[url.pathname]) {
       const body = await req.json();
@@ -41,11 +53,6 @@ Bun.serve({
       const res = new Response(JSON.stringify(response), {
         status: response.success ? 200 : 400,
       });
-      res.headers.set("Access-Control-Allow-Origin", "*");
-      res.headers.set(
-        "Access-Control-Allow-Methods",
-        "GET, POST, PUT, DELETE, OPTIONS"
-      );
       return res;
     }
 
