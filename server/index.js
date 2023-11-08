@@ -64,7 +64,7 @@ const setCorsHeaders = (res, origin) => {
 Bun.serve({
   port: 8080,
   async fetch(req) {
-    console.log(API_KEY);
+    console.log(process.env.API_KEY);
     if (req.method === "OPTIONS") {
       const res = new Response("Departed", CORS_HEADERS);
       return res;
