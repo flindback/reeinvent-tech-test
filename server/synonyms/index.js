@@ -30,9 +30,20 @@ export class SynonymsService {
   find(word) {
     if (this.roots[word] === undefined) return undefined;
 
+    /**
+     * The following line handles path compression.
+     * It makes every node in the path point to the root, or parent, string.
+     * This is done to speed up future find operations.
+     */
+
+    // If this word isn't the parent of its group...
     if (this.roots[word] !== word) {
+      // ...find the parent, and then...
       this.roots[word] = this.find(this.roots[word]);
+      // ...directly connect this word to the parent.
     }
+    // Now, this word is directly connected to the parent.
+    // Next time we want to find its parent, it's just one step away!
     return this.roots[word];
   }
 
