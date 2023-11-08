@@ -104,11 +104,11 @@ For preflight requests, the API responds to OPTIONS with the allowed methods OPT
 **Error Handling**
 Common HTTP status codes returned by the API include:
 
-200 OK: The request was successful.
-400 Bad Request: The request could not be understood by the server due to malformed syntax.
-403 Forbidden: The server understood the request but refuses to authorize it.
-404 Not Found: The server has not found anything matching the request URI.
-500 Internal Server Error: The server encountered an unexpected condition that prevented it from fulfilling the request.
+- 200 OK: The request was successful.
+- 400 Bad Request: The request could not be understood by the server due to malformed syntax.
+- 403 Forbidden: The server understood the request but refuses to authorize it.
+- 404 Not Found: The server has not found anything matching the request URI.
+- 500 Internal Server Error: The server encountered an unexpected condition that prevented it from fulfilling the request.
 
 # Backlog
 
