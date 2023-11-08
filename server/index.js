@@ -1,5 +1,7 @@
 import { SynonymsService } from "./synonyms";
 
+const API_KEY = process.env.API_KEY;
+
 const synonyms = new SynonymsService();
 
 const addSynonymsHandler = ({ words = [] }) => {
@@ -62,6 +64,7 @@ const setCorsHeaders = (res, origin) => {
 Bun.serve({
   port: 8080,
   async fetch(req) {
+    console.log(API_KEY);
     if (req.method === "OPTIONS") {
       const res = new Response("Departed", CORS_HEADERS);
       return res;
