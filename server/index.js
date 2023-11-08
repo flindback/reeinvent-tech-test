@@ -70,7 +70,6 @@ Bun.serve({
       return res;
     }
     const origin = req.headers.get("Origin") || req.headers.get("Referer");
-    console.log("Have origin, is:", origin);
     if (origin && !allowedOrigins.includes(origin)) {
       return new Response("Forbidden", { status: 403 });
     }

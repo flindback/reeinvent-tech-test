@@ -13,7 +13,6 @@ import {
 import PropTypes from "prop-types";
 
 const AddSynonymsForm = ({ addDispatch, addState, addSynonyms }) => {
-  console.log(addState.wordsToAdd);
   const handleKeyDown = (e) => {
     const actionableKeys = ["Enter", "NumpadEnter", "Space", "Comma"];
     if (actionableKeys.indexOf(e.code) !== -1) {
@@ -35,7 +34,6 @@ const AddSynonymsForm = ({ addDispatch, addState, addSynonyms }) => {
   const removeTag = (e, word) => {
     e.preventDefault();
     const newWords = addState.wordsToAdd.filter((w) => w !== word);
-    console.log("new", newWords);
     addDispatch({ type: "REMOVE_WORD", payload: newWords });
   };
 

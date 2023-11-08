@@ -36,10 +36,8 @@ export const SynonymsProvider = ({ children }) => {
   });
 
   const searchForSynonyms = async (word) => {
-    console.log(word);
     searchDispatch({ type: "START_LOADING" });
     try {
-      console.log("Fetching synonyms...");
       const apiURL = "https://reeinvent-tech-test-st7ohfgpsq-lz.a.run.app";
       const { data } = await axios.post(
         `${apiURL}/find`,
@@ -52,7 +50,6 @@ export const SynonymsProvider = ({ children }) => {
       );
       if (data.responseCode === 200) {
         searchDispatch({ type: "SET_RESULTS", payload: data });
-        console.log("Synonyms fetched!", data);
       } else {
         throw new Error(data.message || "Error fetching synonyms");
       }

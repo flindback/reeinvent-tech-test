@@ -11,7 +11,6 @@ export class SynonymsService {
 
   add(synonyms) {
     if (synonyms.length < 2) {
-      console.log("You need to provide at least two synonyms!");
       return false;
     }
     synonyms.map((synonym) => {
